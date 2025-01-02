@@ -1,6 +1,6 @@
 // components/ThemeToggle.jsx
 import { useContext } from 'react';
-import { DarkModeContext } from '../context/DarkModeContext';
+import { DarkModeContext } from '../../context/DarkModeContext';
 import { SunIcon, MoonIcon } from '@heroicons/react/outline';
 
 const ThemeToggle = () => {

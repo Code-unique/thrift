@@ -2,19 +2,20 @@ import { useState } from 'react';
 import API from '../../utils/api';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { FaUser, FaEnvelope, FaLock } from 'react-icons/fa';
+import { FaUser, FaEnvelope, FaLock, FaUserTag } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 
 const Signup = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [role, setRole] = useState('user'); // Default role is "user"
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await API.post('/api/auth/register', { name, email, password });
+      await API.post('/api/auth/register', { name, email, password, role });
       toast.success('Registration successful! Please login.');
       navigate('/login');
     } catch (err) {
@@ -69,6 +70,19 @@ const Signup = () => {
             required
           />
         </div>
+        <div className="mb-4 flex items-center bg-gray-100 p-3 rounded-md">
+          <FaUserTag className="text-gray-500 mr-3" />
+          <select
+            value={role}
+            onChange={(e) => setRole(e.target.value)}
+            className="flex-1 bg-transparent outline-none text-gray-800"
+            required
+          >
+            <option value="user">User</option>
+            <option value="vendor">Vendor</option>
+            <option value="admin">Admin</option>
+          </select>
+        </div>
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
@@ -78,7 +92,13 @@ const Signup = () => {
           Sign Up
         </motion.button>
         <p className="text-center text-sm text-gray-600 mt-4">
-          Already have an account? <span className="text-yellow-600 cursor-pointer" onClick={() => navigate('/login')}>Login</span>
+          Already have an account?{' '}
+          <span
+            className="text-yellow-600 cursor-pointer"
+            onClick={() => navigate('/login')}
+          >
+            Login
+          </span>
         </p>
       </form>
     </motion.div>
