@@ -6,10 +6,10 @@ const Header = () => {
   const { user, logout } = useContext(AuthContext);
 
   return (
-    <header className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white py-4 shadow-md">
-      <div className="container mx-auto flex justify-between items-center">
-        <h1 className="text-2xl font-bold">
-          <NavLink to="/" className="text-yellow-400">
+    <header className="sticky top-0 z-50 bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg">
+      <div className="container mx-auto flex justify-between items-center py-4 px-6">
+        <h1 className="text-3xl font-bold">
+          <NavLink to="/" className="text-yellow-400 hover:text-yellow-300">
             Quickie
           </NavLink>
         </h1>
@@ -44,7 +44,10 @@ const Header = () => {
                   Admin Dashboard
                 </NavLink>
               )}
-              <button onClick={logout} className="hover:text-yellow-300">
+              <button
+                onClick={logout}
+                className="hover:text-yellow-300 focus:outline-none"
+              >
                 Logout
               </button>
             </>
